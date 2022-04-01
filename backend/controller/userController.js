@@ -36,7 +36,6 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    console.log("cretaed....");
     res.status(201).json({
       _id: user._id,
       name: user.name,
@@ -73,9 +72,22 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Get current user
+// @route /api/user/me
+// @access Private
+
+const getMe = asyncHandler(async (req, res) => {
+  const user = {
+    id: req.user._id,
+    email: req.user.email,
+    name: req.user.name,
+  };
+  res.status(200).json(user);
+});
+
 // Generate Token
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
+  return jwt.sign({ id: id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser, getMe };
