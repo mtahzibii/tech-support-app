@@ -1,4 +1,5 @@
 import { FaUser } from "react-icons/fa";
+import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -57,14 +58,20 @@ function Register() {
     if (password !== password2) {
       toast.error("Passwords do not match");
     } else {
+      // get user data from registration form
       const userData = {
         name,
         email,
         password,
       };
+      // Run the action (registration action)
       dispatch(register(userData));
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
