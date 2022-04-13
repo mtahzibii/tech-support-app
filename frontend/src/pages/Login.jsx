@@ -13,11 +13,11 @@ function Login() {
     password: "",
   });
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   // Form data destructuring
   const { email, password } = formData;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { user, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.auth
@@ -66,28 +66,33 @@ function Login() {
         <h1>
           <FaSignInAlt /> Login
         </h1>
-        <p>Please login to get support</p>
+        <p>Please log in to get support</p>
       </section>
+
       <section className='form'>
-        <form method='post' onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
           <div className='form-group'>
             <input
               type='email'
-              value={email}
+              className='form-control'
               id='email'
               name='email'
-              required
-              placeholder='Enter your email'
+              value={email}
               onChange={onChange}
+              placeholder='Enter your email'
+              required
             />
+          </div>
+          <div className='form-group'>
             <input
               type='password'
-              value={password}
-              name='password'
+              className='form-control'
               id='password'
-              required
-              placeholder='Enter password'
+              name='password'
+              value={password}
               onChange={onChange}
+              placeholder='Enter password'
+              required
             />
           </div>
           <div className='form-group'>
